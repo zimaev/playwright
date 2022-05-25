@@ -9,8 +9,8 @@ class User(object):
     def __init__(self):
 
         self.password = User.fake.password()
-        self.days = str(random.randint(1,31))
-        self.months = str(random.randint(1,12))
+        self.days = str(random.randint(1, 31))
+        self.months = str(random.randint(1, 12))
         self.years = str(random.randint(1900, 2021))
         self.first_name = User.fake.first_name()
         self.last_name = User.fake.last_name()
@@ -27,6 +27,9 @@ class User(object):
 
     def __str__(self):
         return json.dumps(self.__dict__)
+
+
+
 
 
 

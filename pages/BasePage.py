@@ -39,3 +39,19 @@ class BasePage:
     def select_option(self, locator: str, option: str):
         self.page.select_option(locator, option)
 
+    @allure.step('Is element - {locator} present')
+    def is_element_present(self, locator: str) -> bool:
+        try:
+            self.page.wait_for_selector(locator)
+            return True
+        except TError:
+            return False
+
+    @allure.step('Is element - {locator} hidden')
+    def is_element_hidden(self, locator: str) -> bool:
+        try:
+            self.page.wait_for_selector(locator, state='hidden')
+            return True
+        except TError:
+            return False
+

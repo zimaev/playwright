@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 from pages.BasePage import BasePage
-from pages.LoginPage.Login_locator import LoginLocator
+from pages.LoginPage.LoginPageLocators import LoginLocator
 
 
 class LoginPage(BasePage):
@@ -19,5 +19,8 @@ class LoginPage(BasePage):
         expect(self.page.locator('.login-form p')).to_be_visible()
         expect(self.page.locator('.login-form p')).to_have_text('Your email or password is incorrect!')
 
+    def new_user_error_message(self):
+        expect(self.page.locator('.signup-form p')).to_be_visible()
+        expect(self.page.locator('.signup-form p')).to_have_text('Email Address already exist!')
 
 
