@@ -9,6 +9,7 @@ allure-report/
 .DS_Store
 .idea/
 videos/
+report/
 
 # C extensions
 *.so
