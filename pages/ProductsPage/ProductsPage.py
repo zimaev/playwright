@@ -14,8 +14,7 @@ class ProductsPage(BasePage):
 
     def add_product_to_card(self, number):
         self.hover(f'div .productinfo.text-center  >> nth={number - 1}')
-        self.page.pause()
-        self.click(f'.overlay-content .btn.btn-default.add-to-cart nth={number - 1}')
+        self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
 
     def open_product(self, number):
         self.click(f".nav.nav-pills.nav-justified >> nth={number - 1}")

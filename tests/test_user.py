@@ -1,4 +1,4 @@
-from pages.MainPage import ShopPage
+from pages.MainPage.MainPage import ShopPage
 from pages.LoginPage.LoginPage import LoginPage
 from pages.SignupPage.SignupPage import SignupPage
 from pages.SignupPage.AccountCreatedPage import AccountCreatedPage

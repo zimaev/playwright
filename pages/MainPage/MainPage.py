@@ -8,9 +8,10 @@ class ShopPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
         self.login = self.page.locator("text=Signup / Login")
-        self.contact_us = self.page.locator('header', has_text="Contact us")
+        self.contact_us = self.page.locator('.fa.fa-envelope')
         self.test_cases = self.page.locator('header', has_text='Test Cases')
         self.products = self.page.locator('text= Products')
+
 
     def open_login_page(self):
         self.login.click()

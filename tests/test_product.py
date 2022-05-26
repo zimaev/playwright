@@ -1,5 +1,5 @@
 import allure
-from pages.MainPage import ShopPage
+from pages.MainPage.MainPage import ShopPage
 from pages.ProductsPage.ProductsPage import ProductsPage
 from pages.ProductDetailsPage.ProductDetailsPage import ProductsDetailsPage
 import pytest

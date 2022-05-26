@@ -1,4 +1,4 @@
-from pages.MainPage import ShopPage
+from pages.MainPage.MainPage import ShopPage
 from pages.ContactUsPage.ContactUsPage import ContactUsPage
 import allure
 from helpers.contact_us_message import Message
@@ -12,6 +12,7 @@ class TestCommon(object):
     def test_contact_us_form(self, driver):
         shop, contact_us = ShopPage(driver), ContactUsPage(driver)
         msg = Message()
+
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Открыте страницы формы для обратной связи'):
@@ -24,7 +25,7 @@ class TestCommon(object):
             contact_us.visible_success_message()
 
     @allure.title("Test Case 7: Страница проверки тестовых случаев")
-    def test_contact_us_form(self, driver):
+    def test_case_us_form(self, driver):
         shop, contact_us = ShopPage(driver), ContactUsPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
