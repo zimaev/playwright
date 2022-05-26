@@ -26,10 +26,6 @@ class BasePage:
     def hover(self, locator: str):
         self.page.hover(locator)
 
-    @allure.step('Go to url - {url}')
-    def go_to_url(self, url: str):
-        self.page.goto(url)
-
     @allure.step('Type text - {text} into locator - {locator}')
     def type(self, locator: str, text: str):
         self.click(locator)

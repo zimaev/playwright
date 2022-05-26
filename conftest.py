@@ -12,7 +12,7 @@ def driver():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False,
                                     devtools=False,
-                                    slow_mo=0000)
+                                    slow_mo=2000)
         context = browser.new_context(record_video_dir="videos/",
                                       viewport={'width': 1280,
                                                 'height': 1024}

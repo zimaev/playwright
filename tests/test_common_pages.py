@@ -23,11 +23,9 @@ class TestCommon(object):
         with allure.step(f'ASSERT'):
             contact_us.visible_success_message()
 
-
     @allure.title("Test Case 7: Страница проверки тестовых случаев")
     def test_contact_us_form(self, driver):
-        with allure.step(f'Открыте стартовой страницы магазина'):
-            shop, contact_us = ShopPage(driver), ContactUsPage(driver)
+        shop, contact_us = ShopPage(driver), ContactUsPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
