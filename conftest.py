@@ -35,27 +35,7 @@ def fake_user():
 
 @pytest.fixture()
 def user_api(fake_user):
-
-    data = {
-        "name": fake_user.first_name,
-        "email": fake_user.email,
-        "password": fake_user.password,
-        "title": random.choice(['Mr', 'Ms']),
-        "birth_date": str(random.randint(1, 31)),
-        "birth_month": str(random.randint(1, 12)),
-        "birth_year":  str(random.randint(1900, 2021)),
-        "firstname": fake_user.first_name,
-        "lastname": fake_user.last_name,
-        "company": fake_user.last_name,
-        "address1": fake_user.address1,
-        "country": fake_user.country,
-        "zipcode": fake_user.zipcode,
-        "state": fake_user.state,
-        "city": fake_user.state,
-        "mobile_number": fake_user.mobile_number
-    }
-
-    return UserAPI.create_new_user(data)
+    return UserAPI.create_new_user(fake_user.JSON_user())
 
 
 
