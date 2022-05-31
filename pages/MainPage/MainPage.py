@@ -1,28 +1,23 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
 from pages.BasePage import BasePage
-from helpers.user import User
+from pages.MainPage.MainPageLocators import MainPageLocators
 
 
 class ShopPage(BasePage):
 
-    def __init__(self, page: Page):
-        super().__init__(page)
-        self.login = self.page.locator("text=Signup / Login")
-        self.contact_us = self.page.locator('.fa.fa-envelope')
-        self.test_cases = self.page.locator('header', has_text='Test Cases')
-        self.products = self.page.locator('text= Products')
-
     def open_login_page(self):
-        self.login.click()
+        self.click(MainPageLocators.LOGIN)
 
     def open_contact_us_page(self):
-        self.contact_us.click()
+        self.click(MainPageLocators.CONTACT_US)
+
 
     def open_test_cases_page(self):
-        self.test_cases.click()
+
+        self.click(MainPageLocators.TEST_CASES)
 
     def open_products_page(self):
-        self.products.click()
+        self.click(MainPageLocators.PRODUCTS)
 
     def account_logged(self, first_name):
         expect(self.page.locator('li:nth-child(9) > a')).to_have_text(f'Logged in as {first_name}')

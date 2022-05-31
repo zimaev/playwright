@@ -7,10 +7,11 @@ import pytest
 import requests
 
 
+@allure.step('Запуск браузера, контекста')
 @pytest.fixture()
 def driver():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False,
+        browser = p.chromium.launch(headless=True,
                                     devtools=False,
                                     slow_mo=500)
         context = browser.new_context(record_video_dir="tests/videos",
@@ -27,12 +28,14 @@ def driver():
         allure.attach.file(f'{video}', attachment_type=allure.attachment_type.WEBM)
 
 
+@allure.step('Создание тестово пользователя')
 @pytest.fixture()
 def fake_user():
     user = User()
     return user
 
 
+@allure.step('Создание тестово пользователя через API')
 @pytest.fixture()
 def user_api(fake_user):
     return UserAPI.create_new_user(fake_user.JSON_user())
