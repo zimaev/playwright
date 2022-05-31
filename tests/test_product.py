@@ -7,7 +7,7 @@ import pytest
 
 @allure.epic('')
 @allure.suite('')
-class TestProduct(object):
+class TestProduct:
 
     @allure.title("Test Case 8: Проверка отображения всех продуктов и страницы сведений о продукте")
     def test_verify_all_products_and_product_detail_page(self, driver):

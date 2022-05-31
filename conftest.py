@@ -1,10 +1,10 @@
-import pytest
 import random
-import requests
 from playwright.sync_api import sync_playwright
 import allure
 from helpers.user import User
 from api.UserAPI import UserAPI
+import pytest
+import requests
 
 
 @pytest.fixture()
@@ -12,8 +12,8 @@ def driver():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False,
                                     devtools=False,
-                                    slow_mo=3000)
-        context = browser.new_context(record_video_dir="videos/",
+                                    slow_mo=500)
+        context = browser.new_context(record_video_dir="tests/videos",
                                       viewport={'width': 1440,
                                                 'height': 1024}
                                       )
@@ -55,10 +55,10 @@ def user_api(fake_user):
         "mobile_number": fake_user.mobile_number
     }
 
-    url = "https://automationexercise.com/api/createAccount"
+    return UserAPI.create_new_user(data)
 
-    with allure.step(f'Создание пользователя через API'):
-        return requests.request("POST", url=url, data=data)
+
+
 
 
 

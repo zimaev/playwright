@@ -17,7 +17,7 @@ class TestCommon(object):
             shop.open_site()
         with allure.step(f'Открыте страницы формы для обратной связи'):
             shop.open_contact_us_page()
-        with allure.step(f'На  отображается сообщение GET IN TOUCH'):
+        with allure.step(f'На странице отображается сообщение GET IN TOUCH'):
             contact_us.visible_form()
         with allure.step(f'Заполнение формы обратной связи'):
             contact_us.fill_form(msg)

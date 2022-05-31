@@ -12,7 +12,6 @@ class ShopPage(BasePage):
         self.test_cases = self.page.locator('header', has_text='Test Cases')
         self.products = self.page.locator('text= Products')
 
-
     def open_login_page(self):
         self.login.click()
 
@@ -26,7 +25,7 @@ class ShopPage(BasePage):
         self.products.click()
 
     def account_logged(self, first_name):
-        expect(self.page.locator('li:nth-child(9) > a')).to_contain_text(f'Logged in as {first_name}')
+        expect(self.page.locator('li:nth-child(9) > a')).to_have_text(f'Logged in as {first_name}')
 
     def logout(self):
         self.click('li:nth-child(4) > a')

@@ -24,20 +24,20 @@ class TestUser(object):
             signup_page.enter_account_information(fake_user)
         with allure.step(f'Открылась страница поздравления о созданном аккаунте'):
             account_created_page.account_created_message()
-        with allure.step(f'Нажать кнопку continue'):
+        with allure.step(f'Нажать кнопку Сontinue'):
             account_created_page.click_continue()
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
 
     @allure.title("Test Case 2: Авторизация пользователя с корректными учетными данными")
-    def test_login_user(self, driver, fake_user, user_api):
+    def test_login_user_with_correct_user_password(self, driver, fake_user, user_api):
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
             shop.open_login_page()
-        with allure.step(f'Заполнение полей авторизации пользователя  некорретными данными '):
+        with allure.step(f'Заполнение полей авторизации пользователя корретными данными '):
             login_page.login_to_account(fake_user)
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
@@ -72,8 +72,8 @@ class TestUser(object):
         with allure.step(f'Выход из системы'):
             shop.logout()
 
-    @allure.title("Test Case 5: Регистрация пользователя с существущими в системе учетными данными")
-    def test_login_user(self, driver, fake_user, user_api):
+    @allure.title("Test Case 5: Регистрация нового пользователя с существущими в системе учетными данными")
+    def test_login_user_with_alredy_email_address(self, driver, fake_user, user_api):
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):

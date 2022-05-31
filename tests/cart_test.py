@@ -9,6 +9,7 @@ from pages.ProductsPage.ProductsPage import ProductsPage
 @allure.suite('Тесты корзины')
 class TestCart(object):
 
+    @allure.title('Добавление товара в корзину')
     def test_add_product_in_card(self, driver):
         shop, products = ShopPage(driver), ProductsPage(driver)
 
@@ -32,6 +33,6 @@ class TestCart(object):
         products.add_product_to_card(4)
         driver.locator("text=Continue Shopping").click()
         products.modal_window_not_visible()
-        # driver.locator("text=Continue Shopping").click()
+
 
 
