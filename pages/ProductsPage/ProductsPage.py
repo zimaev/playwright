@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 from pages.BasePage import BasePage
+from pages.ProductsPage.ProductsPageLocators import ProductsPageLocators
 
 
 class ProductsPage(BasePage):
@@ -12,12 +13,18 @@ class ProductsPage(BasePage):
     def all_products_visible(self):
         expect(self.features_items).to_be_visible()
 
+    def brand_list_visible(self):
+        expect(self.page.locator(ProductsPageLocators.BRAND_LIST)).to_be_visible()
+
     def add_product_to_card(self, number):
         self.hover(f'div .productinfo.text-center  >> nth={number - 1}')
         self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
 
     def open_product(self, number):
         self.click(f".nav.nav-pills.nav-justified >> nth={number - 1}")
+
+    def select_brand(self, brand):
+        self.click(f'text={brand}')
 
     def search_field(self, name):
         self.click('#search_product')

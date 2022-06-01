@@ -1,4 +1,4 @@
 
 
 class ProductsPageLocators:
-    pass
+    BRAND_LIST = '.brands_products'

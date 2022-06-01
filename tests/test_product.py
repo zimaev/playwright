@@ -119,9 +119,16 @@ class TestProduct:
         8. Убедитесь, что пользователь перешел на эту страницу бренда и может видеть товары
         """
         shop, products, products_detail = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Открыте страницы всех продуктов'):
             shop.open_products_page()
         with allure.step(f'Список всех товаров виден'):
             products.all_products_visible()
+        products.brand_list_visible()
+        products.select_brand('MADAME')
+        with allure.step(f'Список всех товаров виден'):
+            products.all_products_visible()
+        products.select_brand('KOOKIE KIDS')
+

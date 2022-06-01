@@ -3,8 +3,7 @@ from pages.ContactUsPage.ContactUsPage import ContactUsPage
 import allure
 from helpers.contact_us_message import Message
 from pages.CartPage.CartPage import CartPage
-from pages.ProductsPage.ProductsPage import ProductsPage
-from pages.ProductDetailsPage.ProductDetailsPage import ProductsDetailsPage
+
 
 @allure.epic('Общие тесты')
 @allure.suite('Общие тесты')
