@@ -106,3 +106,22 @@ class TestProduct:
         """
         pass
 
+    @allure.title("Test Case 19: Просмотр и корзина продуктов бренда")
+    def test_view_and_cart_brand_products(self, driver):
+        """
+        1. Запустите браузер
+        2. Перейдите по URL-адресу 'http://automationexercise.com '
+        3. Нажмите на кнопку "Продукты".
+        4. Убедитесь, что бренды видны на левой боковой панели
+        5. Нажмите на любое фирменное наименование
+        6. Убедитесь, что пользователь переходит на страницу бренда и отображаются продукты бренда
+        7. На левой боковой панели нажмите на любую другую ссылку бренда
+        8. Убедитесь, что пользователь перешел на эту страницу бренда и может видеть товары
+        """
+        shop, products, products_detail = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver)
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Открыте страницы всех продуктов'):
+            shop.open_products_page()
+        with allure.step(f'Список всех товаров виден'):
+            products.all_products_visible()

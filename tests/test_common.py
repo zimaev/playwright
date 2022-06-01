@@ -3,6 +3,8 @@ from pages.ContactUsPage.ContactUsPage import ContactUsPage
 import allure
 from helpers.contact_us_message import Message
 from pages.CartPage.CartPage import CartPage
+from pages.ProductsPage.ProductsPage import ProductsPage
+from pages.ProductDetailsPage.ProductDetailsPage import ProductsDetailsPage
 
 @allure.epic('Общие тесты')
 @allure.suite('Общие тесты')
@@ -94,19 +96,6 @@ class TestCommon:
         with allure.step(f'Проверка появления сообщение Вы успешно подписаны'):
             shop.successfully_subscribed_message()
 
-    @allure.title("Test Case 19: Просмотр и корзина продуктов бренда")
-    def test_view_and_cart_brand_products(self, driver):
-        """
-        1. Запустите браузер
-        2. Перейдите по URL-адресу 'http://automationexercise.com '
-        3. Нажмите на кнопку "Продукты".
-        4. Убедитесь, что бренды видны на левой боковой панели
-        5. Нажмите на любое фирменное наименование
-        6. Убедитесь, что пользователь переходит на страницу бренда и отображаются продукты бренда
-        7. На левой боковой панели нажмите на любую другую ссылку бренда
-        8. Убедитесь, что пользователь перешел на эту страницу бренда и может видеть товары
-        """
-        pass
 
 
 
