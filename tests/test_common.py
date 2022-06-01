@@ -64,7 +64,14 @@ class TestCommon:
         6. Введите адрес электронной почты в поле ввода и нажмите кнопку со стрелкой
         7. Проверка успеха сообщение "Вы успешно подписаны!" отображается
         """
-        pass
+        shop = ShopPage(driver)
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Ввод email в поле ввода и нажатие кнопки со стрелкой'):
+            shop.subscribe()
+        with allure.step(f'Проверка появления сообщение Вы успешно подписаны'):
+            shop.successfully_subscribed_message()
+
 
     @allure.title("Test Case 11: Проверка подписки на странице корзины")
     def test_verify_subscription_in_card_page(self, driver):
@@ -78,7 +85,7 @@ class TestCommon:
         7. Введите адрес электронной почты в поле ввода и нажмите кнопку со стрелкой
         8. Проверка успеха отображается сообщение "Вы успешно подписались!"
         """
-        pass
+        driver.goto("https://automationexercise.com/")
 
     @allure.title("Test Case 19: Просмотр и корзина продуктов бренда")
     def test_view_and_cart_brand_products(self, driver):

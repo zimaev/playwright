@@ -37,6 +37,15 @@ class ShopPage(BasePage):
     def modal_window_not_visible(self):
         expect(self.page.locator('.modal-content')).not_to_be_visible()
 
+    def subscribe(self):
+        # self.page.locator(MainPageLocators.SUBSCRIBE)
+        self.type(MainPageLocators.SUBSCRIBE, 'admin@example.com')
+        self.click(MainPageLocators.SUBSCRIBE_BUTTON)
+
+    def successfully_subscribed_message(self):
+        expect(self.page.locator(MainPageLocators.SUCCESS)).to_be_visible()
+        expect(self.page.locator(MainPageLocators.SUCCESS)).to_have_text('You have been successfully subscribed!')
+
 
 
 

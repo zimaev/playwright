@@ -10,9 +10,10 @@ import pytest
 @pytest.fixture()
 def driver():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True,
+        browser = p.chromium.launch(headless=False,
                                     devtools=False,
-                                    slow_mo=500)
+                                    slow_mo=500,
+                                    timeout=30000)
         context = browser.new_context(record_video_dir="./videos",
                                       viewport={'width': 1440,
                                                 'height': 1024}
