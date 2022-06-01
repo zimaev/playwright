@@ -6,7 +6,7 @@ from helpers.contact_us_message import Message
 
 @allure.epic('Общие тесты')
 @allure.suite('Общие тесты')
-class TestCommon(object):
+class TestCommon:
 
     @allure.title("Test Case 6: Форма обратной связи")
     def test_contact_us_form(self, driver):
@@ -22,8 +22,6 @@ class TestCommon(object):
         9. Нажмите кнопку OK
         10. Проверьте сообщение об успехе "Успех! Ваши данные были успешно отправлены.
         11. Нажмите кнопку "Домой" и убедитесь, что вы успешно попали на домашнюю страницу
-        :param driver:
-        :return:
         """
         shop, contact_us = ShopPage(driver), ContactUsPage(driver)
         msg = Message()
@@ -47,8 +45,6 @@ class TestCommon(object):
         3. Убедитесь, что домашняя страница видна успешно
         4. Нажмите на кнопку "Test Cases"
         5. Убедитесь, что пользователь успешно перешел на страницу test cases
-        :param driver:
-        :return:
         """
         shop, contact_us = ShopPage(driver), ContactUsPage(driver)
 
@@ -67,8 +63,6 @@ class TestCommon(object):
         5. Проверьте текст "ПОДПИСКА"
         6. Введите адрес электронной почты в поле ввода и нажмите кнопку со стрелкой
         7. Проверка успеха сообщение "Вы успешно подписаны!" отображается
-        :param driver:
-        :return:
         """
         pass
 
@@ -83,8 +77,6 @@ class TestCommon(object):
         6. Проверьте текст "ПОДПИСКА".
         7. Введите адрес электронной почты в поле ввода и нажмите кнопку со стрелкой
         8. Проверка успеха отображается сообщение "Вы успешно подписались!"
-        :param driver:
-        :return:
         """
         pass
 
@@ -99,9 +91,6 @@ class TestCommon(object):
         6. Убедитесь, что пользователь переходит на страницу бренда и отображаются продукты бренда
         7. На левой боковой панели нажмите на любую другую ссылку бренда
         8. Убедитесь, что пользователь перешел на эту страницу бренда и может видеть товары
-
-        :param driver:
-        :return:
         """
         pass
 

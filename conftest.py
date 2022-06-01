@@ -1,10 +1,9 @@
-import random
+
 from playwright.sync_api import sync_playwright
 import allure
 from helpers.user import User
 from api.UserAPI import UserAPI
 import pytest
-import requests
 
 
 @allure.step('Запуск браузера, контекста')
@@ -14,7 +13,7 @@ def driver():
         browser = p.chromium.launch(headless=True,
                                     devtools=False,
                                     slow_mo=500)
-        context = browser.new_context(record_video_dir="tests/videos",
+        context = browser.new_context(record_video_dir="./videos",
                                       viewport={'width': 1440,
                                                 'height': 1024}
                                       )
@@ -39,14 +38,3 @@ def fake_user():
 @pytest.fixture()
 def user_api(fake_user):
     return UserAPI.create_new_user(fake_user.JSON_user())
-
-
-
-
-
-
-
-
-
-
-

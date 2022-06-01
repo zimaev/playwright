@@ -29,6 +29,18 @@ class ProductsDetailsPage(BasePage):
         with allure.step(f'Бренд продукта отображается'):
             expect(self.brand).to_be_visible()
 
+    def set_product_count(self, count):
+        self.page.locator("input[name=\"quantity\"]").click()
+        self.page.locator("input[name=\"quantity\"]").fill(count)
+
+    def click_add_to_card(self):
+        self.click('.btn.btn-default.cart')
+
+
+
+
+
+
 
 
 

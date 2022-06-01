@@ -62,10 +62,6 @@ class TestUser(object):
         8. Убедитесь, что "Logined in as username" виден
         9. Нажмите кнопку "Удалить учетную запись"
         10. Убедитесь, что "УЧЕТНАЯ ЗАПИСЬ УДАЛЕНА!" видна
-        :param driver:
-        :param fake_user:
-        :param user_api:
-        :return:
         """
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 
@@ -89,9 +85,6 @@ class TestUser(object):
         6. Введите неверный адрес электронной почты и пароль
         7. Нажмите кнопку "Войти".
         8. Проверьте, видна ли ошибка "Ваш адрес электронной почты или пароль неверны!"
-        :param driver:
-        :param fake_user:
-        :return:
         """
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 
@@ -117,10 +110,6 @@ class TestUser(object):
         8. Убедитесь, что "Logined in as username" виден
         9. Нажмите кнопку "Выход"
         10. Убедитесь, что пользователь перешел на страницу входа
-        :param driver:
-        :param fake_user:
-        :param user_api:
-        :return:
         """
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 
@@ -148,10 +137,6 @@ class TestUser(object):
         6. Введите имя и уже зарегистрированный адрес электронной почты
         7. Нажмите кнопку "Зарегистрироваться"
         8. Проверьте, что ошибка "Адрес электронной почты уже существует!" видна
-        :param driver:
-        :param fake_user:
-        :param user_api:
-        :return:
         """
         login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
 

@@ -5,3 +5,4 @@ class MainPageLocators:
     CONTACT_US = '.fa.fa-envelope'
     TEST_CASES = "text='Test Cases'"
     PRODUCTS = 'text= Products'
+    CART = 'text=Cart'
