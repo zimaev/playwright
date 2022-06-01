@@ -2,7 +2,7 @@ from pages.MainPage.MainPage import ShopPage
 from pages.ContactUsPage.ContactUsPage import ContactUsPage
 import allure
 from helpers.contact_us_message import Message
-
+from pages.CartPage.CartPage import CartPage
 
 @allure.epic('Общие тесты')
 @allure.suite('Общие тесты')
@@ -72,7 +72,6 @@ class TestCommon:
         with allure.step(f'Проверка появления сообщение Вы успешно подписаны'):
             shop.successfully_subscribed_message()
 
-
     @allure.title("Test Case 11: Проверка подписки на странице корзины")
     def test_verify_subscription_in_card_page(self, driver):
         """
@@ -85,7 +84,15 @@ class TestCommon:
         7. Введите адрес электронной почты в поле ввода и нажмите кнопку со стрелкой
         8. Проверка успеха отображается сообщение "Вы успешно подписались!"
         """
-        driver.goto("https://automationexercise.com/")
+        shop, view_cart = ShopPage(driver), CartPage(driver)
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Открыте  страницe корзины'):
+            shop.open_cart()
+        with allure.step(f'Ввод email в поле ввода и нажатие кнопки со стрелкой'):
+            shop.subscribe()
+        with allure.step(f'Проверка появления сообщение Вы успешно подписаны'):
+            shop.successfully_subscribed_message()
 
     @allure.title("Test Case 19: Просмотр и корзина продуктов бренда")
     def test_view_and_cart_brand_products(self, driver):
