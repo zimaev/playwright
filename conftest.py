@@ -12,8 +12,8 @@ def driver():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False,
                                     devtools=False,
-                                    slow_mo=500,
-                                    timeout=30000)
+                                    slow_mo=000,
+                                    timeout=60000)
         context = browser.new_context(record_video_dir="./videos",
                                       viewport={'width': 1440,
                                                 'height': 1024}
@@ -22,10 +22,12 @@ def driver():
         page = context.new_page()
         yield page
         video = page.video.path()
+
         context.tracing.stop(path="trace.zip")
         page.close()
         browser.close()
         allure.attach.file(f'{video}', attachment_type=allure.attachment_type.WEBM)
+
 
 
 @allure.step('Создание тестово пользователя')
@@ -39,3 +41,4 @@ def fake_user():
 @pytest.fixture()
 def user_api(fake_user):
     return UserAPI.create_new_user(fake_user.JSON_user())
+

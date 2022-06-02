@@ -102,6 +102,7 @@ class TestCart:
         6. Убедитесь, что отображается страница корзины
         7. Нажмите кнопку "X", соответствующую конкретному продукту
         8. Убедитесь, что товар удален из корзины
+        TODO Доделать кейс. Удаление не реализованно.
         """
         shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(
             driver), CartPage(driver)
@@ -131,7 +132,23 @@ class TestCart:
         6. Нажмите на кнопку "Просмотреть корзину".
         7. Убедитесь, что товар отображается на странице корзины
         """
-        pass
+        shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(
+            driver), CartPage(driver)
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Добавить товары в корзину'):
+            shop.add_product_to_card(1)
+        with allure.step(f'Всплывающее окно после отобразилось'):
+            shop.modal_window_visible()
+        with allure.step(f'Склик на кнопку Continue Shopping'):
+            driver.locator("text=Continue Shopping").click()
+        with allure.step(f'Добавить товары в корзину'):
+            shop.add_product_to_card(2)
+        with allure.step(f'Всплывающее окно после отобразилось'):
+            shop.modal_window_visible()
+        with allure.step(f'Клик на кнопку View Cart'):
+            driver.locator("//u[text()='View Cart']").click()
+
 
 
 

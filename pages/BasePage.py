@@ -51,3 +51,11 @@ class BasePage:
         except TError:
             return False
 
+    def attach_screenshot(self, locator, name):
+        allure.attach(
+            self.page.locator(locator).screenshot(path="screenshot.png"),
+            name=name,
+            attachment_type=allure.attachment_type.PNG
+        )
+
+
