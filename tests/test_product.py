@@ -6,6 +6,7 @@ from api.BrandAPI import BrandAPI
 import pytest
 import random
 from helpers.contact_us_message import Message
+from pages.LoginPage.LoginPage import LoginPage
 
 
 @allure.epic('Тесты на товары')
@@ -26,6 +27,7 @@ class TestProduct:
         9. Убедитесь, что видны детали: название продукта, категория, цена, доступность, состояние, бренд
         """
         shop, products, products_detail = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Открыте страницы всех продуктов'):
@@ -51,6 +53,7 @@ class TestProduct:
         """
 
         shop, products, products_detail = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Открыте страницы всех продуктов'):
@@ -62,10 +65,7 @@ class TestProduct:
         with allure.step(f'Искомый товар отображается на странице'):
             products.searched_products_visible('Frozen Tops For Kids')
 
-
-
     @allure.title("Test Case 18: Просмотр продуктов категории")
-
     def test_search_product_category(self, driver):
         """
         1. Запустите браузер
@@ -89,7 +89,7 @@ class TestProduct:
             products.select_category("Woman")
 
     @allure.title("Test Case 20: Поиск товаров и проверка корзины после входа в систему")
-    def test_search_product_after_system(self, driver):
+    def test_search_product_after_system(self, driver, fake_user, user_api):
         """
         1. Запустите браузер
         2. Перейдите по URL-адресу 'http://automationexercise.com '
@@ -104,7 +104,32 @@ class TestProduct:
         11. Снова перейдите на страницу Корзины
         12. Убедитесь, что эти продукты также видны в корзине после входа в систему
         """
-        pass
+        shop, products, products_detail, login_page = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver), LoginPage(driver)
+
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Открыте страницы всех продуктов'):
+            shop.open_products_page()
+        with allure.step(f'Список всех товаров виден'):
+            products.all_products_visible()
+        with allure.step(f'Поиск товара по имени'):
+            products.search_field('Frozen Tops For Kids')
+        with allure.step(f'Искомый товар отображается на странице'):
+            products.searched_products_visible('Frozen Tops For Kids')
+        with allure.step(f'Добавление первого продукта в корзину'):
+            products.add_product_to_card(1)
+        with allure.step(f'Всплывающее окно после отобразилось'):
+            products.modal_window_visible()
+        with allure.step(f'Клик на кнопку View Cart'):
+            driver.locator("//u[text()='View Cart']").click()
+        with allure.step(f'Клик в хедере на элемент Signup / Login'):
+            shop.open_login_page()
+        with allure.step(f'Заполнение полей авторизации пользователя корретными данными '):
+            login_page.login_to_account(fake_user)
+        with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
+            shop.account_logged(fake_user.first_name)
+        with allure.step(f'Открыте страницы всех продуктов'):
+            shop.open_cart()
 
     @allure.title("Test Case 21: Добавление отзыва о продукте")
     def test_add_review_on_product(self, driver, fake_user):

@@ -12,7 +12,6 @@ class ShopPage(BasePage):
         self.click(MainPageLocators.CONTACT_US)
 
     def open_test_cases_page(self):
-
         self.click(MainPageLocators.TEST_CASES)
 
     def open_products_page(self):

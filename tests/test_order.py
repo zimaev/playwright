@@ -37,9 +37,13 @@ class TestOrder:
         19. Нажмите кнопку "Удалить учетную запись"
         20. Подтвердите "УЧЕТНАЯ ЗАПИСЬ УДАЛЕНА!" и нажмите кнопку "Продолжить"
         """
-        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), ShopPage(driver), \
-                                                              SignupPage(driver), AccountCreatedPage(driver),\
-                                                                    CartPage(driver), CheckoutPage(driver), PaymentPage(driver)
+        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), \
+                                                                                            ShopPage(driver), \
+                                                                                            SignupPage(driver), \
+                                                                                            AccountCreatedPage(driver),\
+                                                                                            CartPage(driver), \
+                                                                                            CheckoutPage(driver), \
+                                                                                            PaymentPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
@@ -98,9 +102,13 @@ class TestOrder:
         17. Нажмите кнопку "Удалить учетную запись"
         18. Подтвердите "УЧЕТНАЯ ЗАПИСЬ УДАЛЕНА!" и нажмите кнопку "Продолжить"
         """
-        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), ShopPage(driver), \
-                                                                                            SignupPage(driver), AccountCreatedPage(driver), \
-                                                                                            CartPage(driver), CheckoutPage(driver), PaymentPage(driver)
+        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), \
+                                                                                            ShopPage(driver), \
+                                                                                            SignupPage(driver), \
+                                                                                            AccountCreatedPage(driver), \
+                                                                                            CartPage(driver), \
+                                                                                            CheckoutPage(driver), \
+                                                                                            PaymentPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
@@ -155,9 +163,14 @@ class TestOrder:
         16. Нажмите кнопку "Удалить учетную запись"
         17. Подтвердите "УЧЕТНАЯ ЗАПИСЬ УДАЛЕНА!" и нажмите кнопку "Продолжить"
         """
-        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), ShopPage(driver), \
-                                                                                            SignupPage(driver), AccountCreatedPage(driver), \
-                                                                                            CartPage(driver), CheckoutPage(driver), PaymentPage(driver)
+        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), \
+                                                                                            ShopPage(driver), \
+                                                                                            SignupPage(driver), \
+                                                                                            AccountCreatedPage(driver), \
+                                                                                            CartPage(driver), \
+                                                                                            CheckoutPage(driver), \
+                                                                                            PaymentPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
@@ -233,16 +246,13 @@ class TestOrder:
             driver.locator("//u[text()='View Cart']").click()
         with allure.step(f'Склик на кнопку Proceed To Checkout'):
             driver.locator(".btn.btn-default.check_out").click()
-
-#####################################################################################################################
         with allure.step(f'Проверка 1 '):
             checkout.assert_billing_address(fake_user)
         with allure.step(f'Проверка 2'):
             checkout.assert_delivery_address(fake_user)
 
-
     @allure.title("Test Case 24: Загрузка счета-фактуры после заказа на покупку")
-    def test_download_invoice_after_purchase_order(self, driver):
+    def test_download_invoice_after_purchase_order(self, driver, fake_user):
         """"
         1. Запустите браузер
         2. Перейдите по URL-адресу 'http://automationexercise.com '
@@ -267,4 +277,51 @@ class TestOrder:
         21. Нажмите кнопку "Удалить учетную запись"
         22. Подтвердите "УЧЕТНАЯ ЗАПИСЬ УДАЛЕНА!" и нажмите кнопку "Продолжить"
         """
-        pass
+        login_page, shop, signup_page, account_created_page, view_cart, checkout, payment = LoginPage(driver), \
+                                                                                            ShopPage(driver), \
+                                                                                            SignupPage(driver), \
+                                                                                            AccountCreatedPage(driver), \
+                                                                                            CartPage(driver), \
+                                                                                            CheckoutPage(driver), \
+                                                                                            PaymentPage(driver)
+
+        with allure.step(f'Открыте стартовой страницы магазина'):
+            shop.open_site()
+        with allure.step(f'Добавить товары в корзину'):
+            shop.add_product_to_card(1)
+        with allure.step(f'Всплывающее окно после отобразилось'):
+            shop.modal_window_visible()
+        with allure.step(f'Склик на кнопку Открыть корзину'):
+            driver.locator("//u[text()='View Cart']").click()
+        with allure.step(f'Склик на кнопку Proceed To Checkout'):
+            driver.locator(".btn.btn-default.check_out").click()
+        with allure.step(f'Склик на кнопку Proceed To Checkout'):
+            driver.locator("//u[text()='Register / Login']").click()
+        with allure.step(f'Ввод имени и email в форму создания нового пользователя'):
+            login_page.create_new_user(fake_user)
+        with allure.step(f'Заполнение полей регистрации нового пользователя '):
+            signup_page.enter_account_information(fake_user)
+        with allure.step(f'Открылась страница поздравления о созданном аккаунте'):
+            account_created_page.account_created_message()
+        with allure.step(f'Нажать кнопку Сontinue'):
+            account_created_page.click_continue()
+        with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
+            shop.account_logged(fake_user.first_name)
+        with allure.step(f'Открыть карзину'):
+            shop.open_cart()
+        with allure.step(f'Склик на кнопку Proceed To Checkout'):
+            view_cart.click_proceed_check_out()
+        with allure.step(f'Заполнение комментария к заказу'):
+            checkout.fill_comment_to_order()
+        with allure.step(f'Склик на кнопку Place Order'):
+            checkout.click_place_order()
+        with allure.step(f'Заполнение реквизитов карты'):
+            payment.fill_card_details()
+        with allure.step(f'Подтверждение платежных данных и оформление заказа'):
+            payment.click_pay_and_confirm_order()
+
+        with driver.expect_download() as download_info:
+            driver.locator("text=Download Invoice").click()
+        download = download_info.value
+        print(download)
+        driver.locator("text=Continue").click()

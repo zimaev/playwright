@@ -39,7 +39,7 @@ class TestCommon:
             contact_us.visible_success_message()
 
     @allure.title("Test Case 7: Страница проверки тестовых случаев")
-    def test_case_us_form(self, driver):
+    def test_case_page(self, driver):
         """
         1. Запустите браузер
         2. Перейдите по URL-адресу 'http://automationexercise.com '
