@@ -1,6 +1,7 @@
 from pages.BasePage import BasePage
 from pages.CartPage.CheckoutPage.CheckoutPageLocators import CheckoutPageLocators
 from playwright.sync_api import expect
+import random
 
 
 class CheckoutPage(BasePage):

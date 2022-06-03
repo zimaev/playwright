@@ -9,7 +9,7 @@ import pytest
 @pytest.fixture()
 def driver():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False,
+        browser = p.chromium.launch(headless=True,
                                     devtools=False,
                                     slow_mo=000,
                                     timeout=60000)

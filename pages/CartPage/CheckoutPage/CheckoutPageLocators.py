@@ -1,4 +1,5 @@
 
+
 class CheckoutPageLocators:
 
     PLACE_ORDER = ".btn.btn-default.check_out"
@@ -17,3 +18,5 @@ class CheckoutPageLocators:
     BILLING_COMPANY = "#address_invoice .address_address1.address_address2 >> nth=0"
     BILLING_COUNTY = "#address_invoice .address_country_name"
     BILLING_PHONE = "#address_invoice .address_phone"
+
+
