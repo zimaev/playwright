@@ -1,5 +1,4 @@
 
-
 class ProductsDetailsPageLocators:
 
     PRODUCT_NAME = '.product-information h2'
@@ -9,6 +8,7 @@ class ProductsDetailsPageLocators:
     CONDITION = 'text=Condition'
     BRAND = '.product-information p >> nth=3'
 
+    # REVIEW_FORM
     NAME = "#review-form #name"
     EMAIL = "#review-form #email"
     TEXT = "#review-form #review"

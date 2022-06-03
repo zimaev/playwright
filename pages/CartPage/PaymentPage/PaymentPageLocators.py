@@ -1,6 +1,7 @@
 
-
 class PaymentPageLocators:
+
+    # CARDS_INFORMATION
     PAY_BUTTON = '[data-qa="pay-button"]'
     NAME_CARD = '[data-qa="name-on-card"]'
     NUMBER_CARD = '[data-qa="card-number"]'

@@ -1,6 +1,6 @@
-
 class ContactUsPageLocator:
 
+    # CONTACT-FORM
     GET_IN_TOUCH = '.contact-form .title.text-center'
     NAME = "[data-qa='name']"
     EMAIL = "[data-qa='email']"
@@ -9,5 +9,3 @@ class ContactUsPageLocator:
     SUBMIT_BUTTON = "[data-qa='submit-button']"
     SUCCESS_MSG = '.status.alert.alert-success'
     HOME_BTN = '.btn.btn-success'
-
-

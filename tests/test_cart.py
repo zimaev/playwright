@@ -49,7 +49,7 @@ class TestCart:
             products.modal_window_not_visible()
         with allure.step(f'Добавление третьего продукта в корзину'):
             products.add_product_to_card(3)
-        with allure.step(f'Всплывающее окно после отобразилось'):
+        with allure.step(f'Всплывающее окно отобразилось'):
             products.modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
             driver.locator("text=Continue Shopping").click()
@@ -102,7 +102,7 @@ class TestCart:
         6. Убедитесь, что отображается страница корзины
         7. Нажмите кнопку "X", соответствующую конкретному продукту
         8. Убедитесь, что товар удален из корзины
-        TODO Доделать кейс. Удаление не реализованно.
+
         """
         shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(
             driver), CartPage(driver)
@@ -115,11 +115,16 @@ class TestCart:
         with allure.step(f'Склик на кнопку Continue Shopping'):
             driver.locator("text=Continue Shopping").click()
         with allure.step(f'Добавить товары в корзину'):
-            shop.add_product_to_card(2)
+            shop.add_product_to_card(7)
         with allure.step(f'Всплывающее окно после отобразилось'):
             shop.modal_window_visible()
+
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
+        with allure.step(f'Клик на кнопку удаления товара'):
+            view_cart.delete_product(7)
+        with allure.step(f'Товар не отображается в корзине'):
+            view_cart.assert_product_deleted(7)
 
     @allure.title('Test Case 22: Добавить в корзину из рекомендуемых товаров')
     def test_add_to_cart_from_recommended_items(self, driver):

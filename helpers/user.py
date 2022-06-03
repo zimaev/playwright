@@ -26,7 +26,6 @@ class User(object):
         self.email = User.fake.email()
 
     def JSON_user(self):
-
         data = {
             "name": self.first_name,
             "email": self.email,

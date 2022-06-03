@@ -1,6 +1,8 @@
 from playwright.sync_api import Page, expect
 from pages.BasePage import BasePage
 from pages.ProductsPage.ProductsPageLocators import ProductsPageLocators
+from api.ProductAPI import ProductAPI
+import random
 
 
 class ProductsPage(BasePage):
@@ -12,8 +14,13 @@ class ProductsPage(BasePage):
         expect(self.page.locator(ProductsPageLocators.BRAND_LIST)).to_be_visible()
 
     def add_product_to_card(self, number):
-        self.hover(f'div .productinfo.text-center  >> nth={number - 1}')
+        product_list = ProductAPI.get_product_list().json()['products']
+        self.hover(f'div .productinfo.text-center p:has-text("{product_list[number - 1]["name"]}")')
         self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
+
+        # self.hover(f'div .productinfo.text-center  >> nth={number - 1}')
+
+        # self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
 
     def open_product(self, number):
         self.click(f".nav.nav-pills.nav-justified >> nth={number - 1}")

@@ -26,7 +26,7 @@ class BasePage:
     def hover(self, locator: str):
         self.page.hover(locator)
 
-    @allure.step('Type text - {text} into locator - {locator}')
+    @allure.step('Вводе текста - {text} into locator - {locator}')
     def type(self, locator: str, text: str):
         self.click(locator)
         self.page.fill(locator, text)

@@ -11,5 +11,13 @@ class CartPage(BasePage):
     def assert_count_product_items(self, count):
         expect(self.page.locator(CartPageLocator.QUANTITY)).to_have_text(str(count))
 
+    def delete_product(self, number):
+        self.click(f'#product-{number} .cart_delete')
+
+    def assert_product_deleted(self, number):
+        expect(self.page.locator(f'#product-{number}')).not_to_be_visible()
+
+
+
 
 
