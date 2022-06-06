@@ -1,5 +1,4 @@
 import allure
-from playwright.sync_api import TimeoutError as TError
 from playwright.sync_api import Page, expect
 
 
@@ -10,11 +9,11 @@ class BasePage:
     def open_site(self):
         self.page.goto('https://automationexercise.com/')
 
-    @allure.step('Click locator - {locator}')
+    @allure.step('Клик на элемент - {locator}')
     def click(self, locator: str):
         self.page.click(locator)
 
-    @allure.step('Check checkbox locator - {locator}')
+    @allure.step('Установка чек-бокса locator - {locator}')
     def check(self, locator: str):
         self.page.check(locator)
 
@@ -22,7 +21,7 @@ class BasePage:
     def uncheck(self, locator: str):
         self.page.check(locator)
 
-    @allure.step('Hover locator - {locator}')
+    @allure.step('Hover(наведение курсова) locator - {locator}')
     def hover(self, locator: str):
         self.page.hover(locator)
 
@@ -35,27 +34,6 @@ class BasePage:
     def select_option(self, locator: str, option: str):
         self.page.select_option(locator, option)
 
-    @allure.step('Is element - {locator} present')
-    def is_element_present(self, locator: str) -> bool:
-        try:
-            self.page.wait_for_selector(locator)
-            return True
-        except TError:
-            return False
 
-    @allure.step('Is element - {locator} hidden')
-    def is_element_hidden(self, locator: str) -> bool:
-        try:
-            self.page.wait_for_selector(locator, state='hidden')
-            return True
-        except TError:
-            return False
-
-    def attach_screenshot(self, locator, name):
-        allure.attach(
-            self.page.locator(locator).screenshot(path="screenshot.png"),
-            name=name,
-            attachment_type=allure.attachment_type.PNG
-        )
 
 

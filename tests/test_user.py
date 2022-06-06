@@ -29,7 +29,6 @@ class TestUser(object):
             account_created_page.account_created_message()
         with allure.step(f'Нажать кнопку Сontinue'):
             account_created_page.click_continue()
-            driver.pause()
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
 

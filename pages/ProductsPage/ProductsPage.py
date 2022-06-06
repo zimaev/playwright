@@ -13,14 +13,15 @@ class ProductsPage(BasePage):
     def brand_list_visible(self):
         expect(self.page.locator(ProductsPageLocators.BRAND_LIST)).to_be_visible()
 
-    def add_product_to_card(self, number):
-        product_list = ProductAPI.get_product_list().json()['products']
-        self.hover(f'div .productinfo.text-center p:has-text("{product_list[number - 1]["name"]}")')
-        self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
-
-        # self.hover(f'div .productinfo.text-center  >> nth={number - 1}')
-
-        # self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
+    def add_product_to_card(self, name):
+        if isinstance(name, str):
+            number = ProductAPI.search_product(name).json()['products']
+            self.hover(f"[class='productinfo text-center'] [data-product-id='{number[0]['id']}']")
+            self.click(f"[class=overlay-content ] [data-product-id='{number[0]['id']}']")
+        if isinstance(name, int):
+            product_list = ProductAPI.get_product_list().json()['products']
+            self.hover(f'div .productinfo.text-center p:has-text("{product_list[name - 1]["name"]}")')
+            self.click(f'[class=overlay-content ] [data-product-id="{name}"]')
 
     def open_product(self, number):
         self.click(f".nav.nav-pills.nav-justified >> nth={number - 1}")
@@ -29,7 +30,10 @@ class ProductsPage(BasePage):
         self.click(f'text={brand}')
 
     def select_category(self, category):
-        self.click(f'#{category}')
+        self.click(f'[href="#{category}"]')
+
+    def select_sub_category(self, sub_category):
+        self.click(f'a >> text={sub_category}')
 
     def search_field(self, name):
         self.click('#search_product')
@@ -40,7 +44,7 @@ class ProductsPage(BasePage):
         expect(self.page.locator('.overlay-content p')).to_contain_text(name)
 
     def brand_products_visible(self, name):
-        expect(self.page.locator('.title.text-center')).to_have_text(f'Brand -{name} Products')
+        expect(self.page.locator('.title.text-center')).to_have_text(f'Brand - {name} Products')
 
     def modal_window_visible(self):
         expect(self.page.locator('.modal-content')).to_be_visible()

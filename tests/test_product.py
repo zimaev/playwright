@@ -35,7 +35,7 @@ class TestProduct:
         with allure.step(f'Список всех товаров виден'):
             products.all_products_visible()
         with allure.step(f'Открыть страницу товара'):
-            products.open_product(number=1)
+            products.open_product(1)
         with allure.step(f'Информация о продукте отображается'):
             products_detail.product_info_visible()
 
@@ -86,8 +86,13 @@ class TestProduct:
             shop.open_products_page()
         with allure.step(f'Список всех товаров виден'):
             products.all_products_visible()
+            # driver.pause()
         with allure.step(f'Выбор категории товара'):
-            products.select_category("Woman")
+            products.select_category("Men")
+        with allure.step(f'Выбор категории товара'):
+            products.select_sub_category("TSHIRTS")
+
+
 
     @allure.title("Test Case 20: Поиск товаров и проверка корзины после входа в систему")
     def test_search_product_after_system(self, driver, fake_user, user_api):
@@ -118,8 +123,8 @@ class TestProduct:
         with allure.step(f'Искомый товар отображается на странице'):
             products.searched_products_visible('Frozen Tops For Kids')
         with allure.step(f'Добавление первого продукта в корзину'):
-            products.add_product_to_card(1)
-        with allure.step(f'Всплывающее окно после отобразилось'):
+            products.add_product_to_card('Frozen Tops For Kids')
+        with allure.step(f'Всплывающее окно  отобразилось'):
             products.modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
@@ -129,7 +134,7 @@ class TestProduct:
             login_page.login_to_account(fake_user)
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
-        with allure.step(f'Открыте страницы всех продуктов'):
+        with allure.step(f'Открыте страницу корзины'):
             shop.open_cart()
 
     @allure.title("Test Case 21: Добавление отзыва о продукте")
@@ -154,7 +159,7 @@ class TestProduct:
         with allure.step(f'Список всех товаров виден'):
             products.all_products_visible()
         with allure.step(f'Открыть страницу товара'):
-            products.open_product(number=1)
+            products.open_product(1)
         with allure.step(f'Информация о продукте отображается'):
             products_detail.product_info_visible()
         with allure.step(f'Информация о продукте отображается'):
@@ -164,9 +169,9 @@ class TestProduct:
         with allure.step(f'Заполнение и отправка отзыва о товаре'):
             products_detail.success_subscribe_message_visible()
 
-    @pytest.mark.xfail(reason='Не продуман механзм передачи имени бренда из выбора в проверку')
+    # @pytest.mark.xfail(reason='Не продуман механзм передачи имени бренда из выбора в проверку')
     @allure.title("Test Case 19: Просмотр и корзина продуктов бренда")
-    def test_view_and_cart_brand_products(self, driver):
+    def test_view_and_cart_brand_products(self,driver ):
         """
         1. Запустите браузер
         2. Перейдите по URL-адресу 'http://automationexercise.com '
@@ -179,11 +184,7 @@ class TestProduct:
         """
         shop, products, products_detail = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver)
 
-        brand_list = BrandAPI.get_brand_list().json()['brands']
-        brand_1 = set([])
-        for i in brand_list:
-            brand_1.add(i['brand'])
-        brand =list(brand_1)
+        brand = list(BrandAPI.get_brand_list())
 
         with allure.step(f'Открыте стартовой страницы магазина'):
             shop.open_site()
@@ -194,9 +195,13 @@ class TestProduct:
         with allure.step(f'Список брендов отображается'):
             products.brand_list_visible()
         with allure.step(f'Выбор бренда для отображения в списке'):
-            products.select_brand(random.choice(brand))
-        products.brand_products_visible(random.choice(brand))
+            products.select_brand(brand[0])
+        with allure.step(f'Бренд тображения в списке'):
+            products.brand_products_visible(brand[0])
         with allure.step(f'Выбор бренда для отображения в списке'):
-            products.select_brand(random.choice(brand))
+            products.select_brand(brand[1])
+        with allure.step(f'Бренд тображения в списке'):
+            products.brand_products_visible(brand[1])
+
 
 

@@ -8,4 +8,9 @@ class BrandAPI:
     def get_brand_list():
         with allure.step(f'получить список всех брендов'):
             url = "https://automationexercise.com/api/brandsList"
-            return requests.request("GET", url=url)
+            brand_list_raw = requests.request("GET", url=url).json()['brands']
+            brand_list = []
+            for i in brand_list_raw:
+                brand_list.append(i['brand'])
+            return set(brand_list)
+

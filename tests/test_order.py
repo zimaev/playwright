@@ -124,7 +124,6 @@ class TestOrder:
             account_created_page.click_continue()
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
-
         with allure.step(f'Добавить товары в корзину'):
             shop.add_product_to_card(1)
         with allure.step(f'Всплывающее окно после отобразилось'):
@@ -179,7 +178,6 @@ class TestOrder:
             login_page.login_to_account(fake_user)
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
             shop.account_logged(fake_user.first_name)
-
         with allure.step(f'Добавить товары в корзину'):
             shop.add_product_to_card(1)
         with allure.step(f'Всплывающее окно после отобразилось'):
