@@ -5,6 +5,7 @@ pipeline {
          steps {
             sh 'python -m pip install --upgrade pip'
             sh 'pip install playwright'
+            sh 'playwright install'
          }
       }
    }
