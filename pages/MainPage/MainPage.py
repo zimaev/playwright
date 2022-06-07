@@ -31,7 +31,7 @@ class ShopPage(BasePage):
         self.click(f'[class=overlay-content ] [data-product-id="{number}"]')
 
     def modal_window_visible(self):
-        expect(self.page.locator('.modal-content')).to_be_visible()
+        expect(self.page.locator('div.modal-content')).to_be_visible()
 
     def modal_window_not_visible(self):
         expect(self.page.locator('.modal-content')).not_to_be_visible()

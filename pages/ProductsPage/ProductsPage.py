@@ -35,6 +35,9 @@ class ProductsPage(BasePage):
     def select_sub_category(self, sub_category):
         self.click(f'a >> text={sub_category}')
 
+    def continue_shopping(self, ):
+        self.click('text=Continue Shopping')
+
     def search_field(self, name):
         self.click('#search_product')
         self.type('#search_product', name)
@@ -47,10 +50,10 @@ class ProductsPage(BasePage):
         expect(self.page.locator('.title.text-center')).to_have_text(f'Brand - {name} Products')
 
     def modal_window_visible(self):
-        expect(self.page.locator('.modal-content')).to_be_visible()
+        expect(self.page.locator('div.modal-content')).to_be_visible()
 
     def modal_window_not_visible(self):
-        expect(self.page.locator('.modal-content')).not_to_be_visible()
+        expect(self.page.locator('div.modal-content')).not_to_be_visible()
 
 
 

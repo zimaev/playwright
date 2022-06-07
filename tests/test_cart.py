@@ -1,4 +1,6 @@
 import allure
+import pytest
+
 from pages.CartPage.CartPage import CartPage
 from pages.MainPage.MainPage import ShopPage
 from pages.ProductsPage.ProductsPage import ProductsPage
@@ -10,6 +12,7 @@ from pages.ProductDetailsPage.ProductDetailsPage import ProductsDetailsPage
 class TestCart:
 
     @allure.title('Test Case 12: Добавление товара в корзину')
+    @pytest.mark.flaky(reruns=2)
     def test_add_product_in_card(self, driver):
         """
         1. Запустите браузер
@@ -36,7 +39,7 @@ class TestCart:
         with allure.step(f'Всплывающее окно после отобразилось'):
             products.modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
-            driver.locator("text=Continue Shopping").click()
+            products.continue_shopping()
         with allure.step(f'Всплывающее окно исчезло'):
             products.modal_window_not_visible()
         with allure.step(f'Добавление второго продукта в корзину'):
@@ -44,7 +47,7 @@ class TestCart:
         with allure.step(f'Всплывающее окно после отобразилось'):
             products.modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
-            driver.locator("text=Continue Shopping").click()
+            products.continue_shopping()
         with allure.step(f'Всплывающее окно исчезло'):
             products.modal_window_not_visible()
         with allure.step(f'Добавление третьего продукта в корзину'):
