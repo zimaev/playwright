@@ -17,12 +17,12 @@ def driver():
                                       viewport={'width': 1440,
                                                 'height': 1024}
                                       )
-        context.tracing.start(screenshots=True, snapshots=True)
+        # context.tracing.start(screenshots=True, snapshots=True)
         page = context.new_page()
         yield page
         video = page.video.path()
 
-        context.tracing.stop(path="trace.zip")
+        # context.tracing.stop(path="trace.zip")
         page.close()
         browser.close()
         allure.attach.file(f'{video}', attachment_type=allure.attachment_type.WEBM)
