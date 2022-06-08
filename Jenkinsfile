@@ -3,6 +3,7 @@ pipeline {
    stages {
       stage('e2e-tests') {
          steps {
+            sh 'pip install pytest'
             sh 'pytest -s -v'
          }
       }
