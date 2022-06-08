@@ -3,9 +3,9 @@ pipeline {
    stages {
       stage('e2e-tests') {
          steps {
-            sh 'python -m pip install --upgrade pip'
             sh 'pip install playwright'
-            sh 'playwright install'
+            sh 'playwright install --with-deps'
+            sh 'pytest -s -v'
          }
       }
    }
