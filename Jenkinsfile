@@ -4,7 +4,7 @@ pipeline {
       stage('install') {
          steps {
             sh 'pip install playwright
-            SH 'playwright install'
+            sh 'playwright install'
          }
       stage('e2e-tests') {
          steps {
