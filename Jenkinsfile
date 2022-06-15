@@ -6,10 +6,6 @@ pipeline {
             sh 'pip install playwright'
             sh 'playwright install'
          }
-      stage('e2e-tests') {
-         steps {
-            sh 'pytest -s -v'
-         }
       }
    }
 }
