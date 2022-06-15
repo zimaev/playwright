@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('install') {
          steps {
-            sh 'pip install playwright'
+            sh 'pip3 install playwright'
             sh 'playwright install'
          }
       }
