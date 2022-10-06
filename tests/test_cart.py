@@ -81,37 +81,25 @@ class TestCart:
 
     @allure.title('Test Case 17: Удаление товаров из корзины')
     def test_remove_products_from_cart(self, driver):
-        """
-        1. Запустите браузер
-        2. Перейдите по URL-адресу 'http://automationexercise.com '
-        3. Убедитесь, что домашняя страница видна успешно
-        4. Добавить товары в корзину
-        5. Нажмите кнопку "Корзина"
-        6. Убедитесь, что отображается страница корзины
-        7. Нажмите кнопку "X", соответствующую конкретному продукту
-        8. Убедитесь, что товар удален из корзины
 
-        """
-        shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(
-            driver), CartPage(driver)
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Добавить товары в корзину'):
-            shop.add_product_to_card(1)
+            ShopPage(driver).add_product_to_card(1)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            shop.modal_window_visible()
+            ShopPage(driver).modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
             driver.locator("text=Continue Shopping").click()
         with allure.step(f'Добавить товары в корзину'):
-            shop.add_product_to_card(7)
+            ShopPage(driver).add_product_to_card(7)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            shop.modal_window_visible()
+            ShopPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
         with allure.step(f'Клик на кнопку удаления товара'):
-            view_cart.delete_product(7)
+            CartPage(driver).delete_product(7)
         with allure.step(f'Товар не отображается в корзине'):
-            view_cart.assert_product_deleted(7)
+            CartPage(driver).assert_product_deleted(7)
 
     @allure.title('Test Case 22: Добавить в корзину из рекомендуемых товаров')
     def test_add_to_cart_from_recommended_items(self, driver):
