@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from pages.CartPage.CartPage import CartPage
 from pages.MainPage.MainPage import ShopPage
 from pages.ProductsPage.ProductsPage import ProductsPage
@@ -14,60 +13,47 @@ class TestCart:
     @allure.title('Test Case 12: Добавление товара в корзину')
     @pytest.mark.flaky(reruns=2)
     def test_add_product_in_card(self, driver):
-        """
-        1. Запустите браузер
-        2. Перейдите по URL-адресу 'http://automationexercise.com'
-        3. Убедитесь, что домашняя страница видна успешно
-        4. Нажмите кнопку "Продукты"
-        5. Наведите курсор на первый продукт и нажмите "Добавить в корзину"
-        6. Нажмите кнопку "Продолжить покупки"
-        7. Наведите курсор на второй продукт и нажмите "Добавить в корзину"
-        8. Нажмите кнопку "Просмотреть корзину"
-        9. Убедитесь, что оба продукта добавлены в корзину
-        10. Проверьте их цены, количество и общую цену
-        """
-        shop, products, cart = ShopPage(driver), ProductsPage(driver), CartPage(driver)
 
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Открыте страницы всех продуктов'):
-            shop.open_products_page()
+            ShopPage(driver).open_products_page()
         with allure.step(f'Список всех товаров виден'):
-            products.all_products_visible()
+            ProductsPage(driver).all_products_visible()
         with allure.step(f'Добавление первого продукта в корзину'):
-            products.add_product_to_card(1)
+            ProductsPage(driver).add_product_to_card(1)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            products.modal_window_visible()
+            ProductsPage(driver).modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
-            products.continue_shopping()
+            ProductsPage(driver).continue_shopping()
         with allure.step(f'Всплывающее окно исчезло'):
-            products.modal_window_not_visible()
+            ProductsPage(driver).modal_window_not_visible()
         with allure.step(f'Добавление второго продукта в корзину'):
-            products.add_product_to_card(2)
+            ProductsPage(driver).add_product_to_card(2)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            products.modal_window_visible()
+            ProductsPage(driver).modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
-            products.continue_shopping()
+            ProductsPage(driver).continue_shopping()
         with allure.step(f'Всплывающее окно исчезло'):
-            products.modal_window_not_visible()
+            ProductsPage(driver).modal_window_not_visible()
         with allure.step(f'Добавление третьего продукта в корзину'):
-            products.add_product_to_card(3)
+            ProductsPage(driver).add_product_to_card(3)
         with allure.step(f'Всплывающее окно отобразилось'):
-            products.modal_window_visible()
+            ProductsPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
         with allure.step(f'Проверка количества каждой товарной позиции'):
-            cart.assert_count_product_items(product=1, count=1)
-            cart.assert_count_product_items(product=2, count=1)
-            cart.assert_count_product_items(product=3, count=1)
+            CartPage(driver).assert_count_product_items(product=1, count=1)
+            CartPage(driver).assert_count_product_items(product=2, count=1)
+            CartPage(driver).assert_count_product_items(product=3, count=1)
         with allure.step(f'Проверка цены каждой товарной позиции'):
-            cart.assert_price_product_items(product=1, price='Rs. 500')
-            cart.assert_price_product_items(product=2, price='Rs. 400')
-            cart.assert_price_product_items(product=3, price='Rs. 1000')
+            CartPage(driver).assert_price_product_items(product=1, price='Rs. 500')
+            CartPage(driver).assert_price_product_items(product=2, price='Rs. 400')
+            CartPage(driver).assert_price_product_items(product=3, price='Rs. 1000')
         with allure.step(f'Проверка итоговой цены каждой товарной позиции'):
-            cart.assert_price_product_items(product=1, price='Rs. 500')
-            cart.assert_price_product_items(product=2, price='Rs. 400')
-            cart.assert_price_product_items(product=3, price='Rs. 1000')
+            CartPage(driver).assert_price_product_items(product=1, price='Rs. 500')
+            CartPage(driver).assert_price_product_items(product=2, price='Rs. 400')
+            CartPage(driver).assert_price_product_items(product=3, price='Rs. 1000')
 
     @allure.title('Test Case 13: Проверка количества товара в корзине')
     def test_verify_product_quantity_in_cart(self, driver):
