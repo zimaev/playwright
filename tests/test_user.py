@@ -12,25 +12,20 @@ class TestUser(object):
     @allure.title("Test Case 1: Регистрация пользователя")
     def test_register_user(self, driver, fake_user):
 
-        login_page, shop, signup_page, account_created_page = LoginPage(driver), \
-                                                              ShopPage(driver), \
-                                                              SignupPage(driver), \
-                                                              AccountCreatedPage(driver)
-
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
-            shop.open_login_page()
+            ShopPage(driver).open_login_page()
         with allure.step(f'Ввод имени и email в форму создания нового пользователя'):
-            login_page.create_new_user(fake_user)
+            LoginPage(driver).create_new_user(fake_user)
         with allure.step(f'Заполнение полей регистрации нового пользователя '):
-            signup_page.enter_account_information(fake_user)
+            SignupPage(driver).enter_account_information(fake_user)
         with allure.step(f'Открылась страница поздравления о созданном аккаунте'):
-            account_created_page.account_created_message()
+            AccountCreatedPage(driver).account_created_message()
         with allure.step(f'Нажать кнопку Сontinue'):
-            account_created_page.click_continue()
+            AccountCreatedPage(driver).click_continue()
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
-            shop.account_logged(fake_user.first_name)
+            ShopPage(driver).account_logged(fake_user.first_name)
 
     @allure.title("Test Case 2: Авторизация пользователя с корректными учетными данными")
     def test_login_user_with_correct_user_password(self, driver, fake_user, user_api):
