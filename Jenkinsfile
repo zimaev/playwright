@@ -3,7 +3,7 @@
 pipeline {
 
     agent {
-        docker { image 'xxx/xxxx:0.0.1' }
+        docker { image 'mcr.microsoft.com/playwright/python:v1.25' }
     }
 
     parameters {
