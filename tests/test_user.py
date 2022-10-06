@@ -54,20 +54,18 @@ class TestUser(object):
     @allure.title("Test Case 4: Выход пользователя из системы")
     def test_logout_user(self, driver, fake_user, user_api):
 
-        login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
-
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
-            shop.open_login_page()
+            ShopPage(driver).open_login_page()
         with allure.step(f'Заполнение полей авторизации пользователя некорретными данными '):
-            login_page.login_to_account(fake_user)
+            LoginPage(driver).login_to_account(fake_user)
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
-            shop.account_logged(fake_user.first_name)
+            ShopPage(driver).account_logged(fake_user.first_name)
         with allure.step(f'Выход из системы'):
-            shop.logout()
+            ShopPage(driver).logout()
 
     @allure.title("Test Case 5: Регистрация нового пользователя с существущими в системе учетными данными")
     def test_login_user_with_alredy_email_address(self, driver, fake_user, user_api):
