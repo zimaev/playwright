@@ -42,16 +42,14 @@ class TestUser(object):
     @allure.title("Test Case 3: Авторизация пользователя с некорректными данными")
     def test_login_with_incorrect_email_password(self, driver, fake_user):
 
-        login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
-
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
-            shop.open_login_page()
+            ShopPage(driver).open_login_page()
         with allure.step(f'Заполнение полей авторизации пользователя  некорретными данными'):
-            login_page.login_to_account(fake_user)
+            LoginPage(driver).login_to_account(fake_user)
         with allure.step(f'Появилось сообщение о некорректном email или пароле'):
-            login_page.login_error_message()
+            LoginPage(driver).login_error_message()
 
     @allure.title("Test Case 4: Выход пользователя из системы")
     def test_logout_user(self, driver, fake_user, user_api):
