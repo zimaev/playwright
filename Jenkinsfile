@@ -3,7 +3,7 @@
 pipeline {
 
     agent {
-        docker { image 'mcr.microsoft.com/playwright/python:v1.25-focal' }
+        docker { image 'mcr.microsoft.com/playwright/python:v1.26.0-focal' }
     }
 
     parameters {
