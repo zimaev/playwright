@@ -41,7 +41,7 @@ class TestCart:
         with allure.step(f'Всплывающее окно отобразилось'):
             ProductsPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
-            driver.locator("//u[text()='View Cart']").click()
+            ShopPage(driver).click_view_cart()
         with allure.step(f'Проверка количества каждой товарной позиции'):
             CartPage(driver).assert_count_product_items(product=1, count=1)
             CartPage(driver).assert_count_product_items(product=2, count=1)
@@ -75,7 +75,7 @@ class TestCart:
         with allure.step(f'Всплывающее окно после отобразилось'):
             ShopPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
-            driver.locator("//u[text()='View Cart']").click()
+            ShopPage(driver).click_view_cart()
         with allure.step(f'продукт отображается на странице корзины с точным количеством'):
             CartPage(driver).assert_count_product_items(product=1, count=4)
 
@@ -117,7 +117,7 @@ class TestCart:
         with allure.step(f'Всплывающее окно после отобразилось'):
             ShopPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
-            driver.locator("//u[text()='View Cart']").click()
+            ShopPage(driver).click_view_cart()
         with allure.step(f'Проверка количества каждой товарной позиции'):
             CartPage(driver).assert_count_product_items(product=1, count=1)
         with allure.step(f'Проверка цены каждой товарной позиции'):

@@ -21,7 +21,7 @@ class ShopPage(BasePage):
         self.click(MainPageLocators.CART)
 
     def account_logged(self, first_name):
-        expect(self.page.locator('li:nth-child(9) > a')).to_have_text(f'Logged in as {first_name}')
+        expect(self.page.locator('li:nth-child(10) > a')).to_contain_text(f'Logged in as {first_name}')
 
     def logout(self):
         self.click('li:nth-child(4) > a')
@@ -32,6 +32,9 @@ class ShopPage(BasePage):
 
     def modal_window_visible(self):
         expect(self.page.locator('div.modal-content')).to_be_visible()
+
+    def click_view_cart(self):
+        self.click("//u[text()='View Cart']")
 
     def modal_window_not_visible(self):
         expect(self.page.locator('.modal-content')).not_to_be_visible()
