@@ -1,10 +1,9 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright:v1.22.0-focal' } }
+   agent { docker { image 'mcr.microsoft.com/playwright/python:v1.22.0-focal' } }
    stages {
-      stage('e2e-tests') {
+      stage('install') {
          steps {
-            sh 'python -m pip install --upgrade pip'
-            sh 'pip install playwright'
+            sh 'pip3 install playwright'
             sh 'playwright install'
          }
       }
