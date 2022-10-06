@@ -57,38 +57,27 @@ class TestCart:
 
     @allure.title('Test Case 13: Проверка количества товара в корзине')
     def test_verify_product_quantity_in_cart(self, driver):
-        """
-        1. Запустите браузер
-        2. Перейдите по URL-адресу 'http://automationexercise.com '
-        3. Убедитесь, что домашняя страница видна успешно
-        4. Нажмите "Просмотреть продукт" для любого продукта на домашней странице
-        5. Проверьте, что деталь продукта открыта
-        6. Увеличьте количество до 4
-        7. Нажмите кнопку "Добавить в корзину"
-        8. Нажмите кнопку "Просмотреть корзину"
-        9. Убедитесь, что продукт отображается на странице корзины с точным количеством
-        """
-        shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(driver), CartPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Открыте страницы всех продуктов'):
-            shop.open_products_page()
+            ShopPage(driver).open_products_page()
         with allure.step(f'Список всех товаров виден'):
-            products.all_products_visible()
+            ProductsPage(driver).all_products_visible()
         with allure.step(f'Открыть страницу товара'):
-            products.open_product(1)
+            ProductsPage(driver).open_product(1)
         with allure.step(f'Информация о продукте отображается'):
-            products_detail.product_info_visible()
+            ProductsDetailsPage(driver).product_info_visible()
         with allure.step(f'Увеличьте количество до 4'):
-            products_detail.set_product_count("4")
+            ProductsDetailsPage(driver).set_product_count("4")
         with allure.step(f'Добавление продукта в корзину'):
-            products_detail.click_add_to_card()
+            ProductsDetailsPage(driver).click_add_to_card()
         with allure.step(f'Всплывающее окно после отобразилось'):
-            shop.modal_window_visible()
+            ShopPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
         with allure.step(f'продукт отображается на странице корзины с точным количеством'):
-            view_cart.assert_count_product_items(product=1, count=4)
+            CartPage(driver).assert_count_product_items(product=1, count=4)
 
     @allure.title('Test Case 17: Удаление товаров из корзины')
     def test_remove_products_from_cart(self, driver):
