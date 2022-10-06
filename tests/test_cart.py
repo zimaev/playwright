@@ -103,33 +103,23 @@ class TestCart:
 
     @allure.title('Test Case 22: Добавить в корзину из рекомендуемых товаров')
     def test_add_to_cart_from_recommended_items(self, driver):
-        """
-        1. Запустите браузер
-        2. Перейдите по URL-адресу 'http://automationexercise.com '
-        3. Прокрутите страницу вниз.
-        4. Убедитесь, что "РЕКОМЕНДУЕМЫЕ ТОВАРЫ" видны.
-        5. Нажмите на кнопку "Добавить в корзину" на рекомендуемом товаре.
-        6. Нажмите на кнопку "Просмотреть корзину".
-        7. Убедитесь, что товар отображается на странице корзины
-        """
-        shop, products, products_detail, view_cart = ShopPage(driver), ProductsPage(driver), ProductsDetailsPage(
-            driver), CartPage(driver)
+
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Добавить товары в корзину'):
-            shop.add_product_to_card(1)
+            ShopPage(driver).add_product_to_card(1)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            shop.modal_window_visible()
+            ShopPage(driver).modal_window_visible()
         with allure.step(f'Склик на кнопку Continue Shopping'):
             driver.locator("text=Continue Shopping").click()
         with allure.step(f'Добавить товары в корзину'):
-            shop.add_product_to_card(2)
+            ShopPage(driver).add_product_to_card(2)
         with allure.step(f'Всплывающее окно после отобразилось'):
-            shop.modal_window_visible()
+            ShopPage(driver).modal_window_visible()
         with allure.step(f'Клик на кнопку View Cart'):
             driver.locator("//u[text()='View Cart']").click()
         with allure.step(f'Проверка количества каждой товарной позиции'):
-            view_cart.assert_count_product_items(product=1, count=1)
+            CartPage(driver).assert_count_product_items(product=1, count=1)
         with allure.step(f'Проверка цены каждой товарной позиции'):
-            view_cart.assert_price_product_items(product=1, price='Rs. 500')
+            CartPage(driver).assert_price_product_items(product=1, price='Rs. 500')
 
