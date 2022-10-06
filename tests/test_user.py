@@ -30,16 +30,14 @@ class TestUser(object):
     @allure.title("Test Case 2: Авторизация пользователя с корректными учетными данными")
     def test_login_user_with_correct_user_password(self, driver, fake_user, user_api):
 
-        login_page, shop, signup_page = LoginPage(driver), ShopPage(driver), SignupPage(driver)
-
         with allure.step(f'Открыте стартовой страницы магазина'):
-            shop.open_site()
+            ShopPage(driver).open_site()
         with allure.step(f'Клик в хедере на элемент Signup / Login'):
-            shop.open_login_page()
+            ShopPage(driver).open_login_page()
         with allure.step(f'Заполнение полей авторизации пользователя корретными данными '):
-            login_page.login_to_account(fake_user)
+            LoginPage(driver).login_to_account(fake_user)
         with allure.step(f'В хедере отображается имя {fake_user.first_name} юзера как авторизованного'):
-            shop.account_logged(fake_user.first_name)
+            ShopPage(driver).account_logged(fake_user.first_name)
 
     @allure.title("Test Case 3: Авторизация пользователя с некорректными данными")
     def test_login_with_incorrect_email_password(self, driver, fake_user):
