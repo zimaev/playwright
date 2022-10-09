@@ -37,9 +37,6 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-			
-		    sh "python -m venv venv"
-		    sh "source venv/bin/activate"
                     sh "pip install -r requirements.txt --user"
                     sh "pytest --alluredir allure-results --env ${measured_environment}"
                     sh "allure generate allure-results --clean -o allure-report"
