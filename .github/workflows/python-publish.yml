@@ -1,21 +1,46 @@
-name: CI
+name: eproc-tests
+
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
 jobs:
-  lint:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Lint
-      run: pytest
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest-playwright
+          python -m pip install playwright
+
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Ensure Playwright browsers are installed
+        run: python -m playwright install chromium
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test with pytest
+        run: |
+          python3 -m pytest -v --browser chromium --template=html1/index.html --report=output/test/test-report.html --variables properties/auto-test-env.yml
+      - name: Create artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report-1
+          path: output/test/test-report.html
+          retention-days: 5
