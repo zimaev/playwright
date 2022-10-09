@@ -31,5 +31,5 @@ jobs:
         run: python -m playwright install chromium  
       - name: Test with pytest
         run: |
-          python3 -m pytest -v --browser chromium --report=output/test/test-report.html
+          python3 -m pytest -v --browser chromium --alluredir=my_allure_results
  
