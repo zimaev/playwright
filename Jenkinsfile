@@ -37,7 +37,7 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-                    sh "pip install -r requirements.txt --user"
+                    sh "pip install --user -r requirements.txt"
                     sh "pytest --alluredir allure-results --env ${measured_environment}"
                     sh "allure generate allure-results --clean -o allure-report"
                     }
