@@ -41,15 +41,3 @@ def fake_user():
 def user_api(fake_user):
     return UserAPI.create_new_user(fake_user.JSON_user())
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport():
-    outcome = yield
-    test_result = outcome.get_result()
-
-    if test_result.when in ["setup", "call"]:
-        xfail = hasattr(test_result, 'wasxfail')
-        if test_result.failed or (test_result.skipped and xfail):
-            global PAGE
-            if PAGE:
-                allure.attach(PAGE.screenshot(), name='screenshot', attachment_type=allure.attachment_type.PNG)
-                allure.attach(PAGE.content(), name='html_source', attachment_type=allure.attachment_type.HTML)
