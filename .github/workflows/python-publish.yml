@@ -1,4 +1,4 @@
-name: eproc-tests
+name: play-tests
 
 on:
   push:
