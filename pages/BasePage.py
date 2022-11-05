@@ -7,7 +7,7 @@ class BasePage:
         self.page = page
 
     def open_site(self):
-        self.page.goto('https://automationexercise.com/')
+        self.page.goto('https://automationexercise.com/', wait_until="domcontentloaded")
 
     @allure.step('Клик на элемент - {locator}')
     def click(self, locator: str):
