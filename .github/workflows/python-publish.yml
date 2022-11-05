@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-    - cron: '*/60 * * * *'
+#   schedule:
+#     - cron: '*/60 * * * *'
 
 permissions:
   contents: read
@@ -33,7 +33,7 @@ jobs:
         run: python -m playwright install chromium  
       - name: Test with pytest
         run: |
-          python3 -m pytest -v --browser chromium --alluredir=my_allure_results
+          python3 -m pytest -v --reruns 2 --browser chromium --alluredir=my_allure_results
 
       - name: Create artifacts
         if: always()
