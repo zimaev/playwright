@@ -31,6 +31,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Ensure Playwright browsers are installed
         run: python -m playwright install chromium  
+      
       - name: Test with pytest
         run: |
           python3 -m pytest -v --reruns 2 --browser chromium --alluredir=my_allure_results
@@ -42,13 +43,13 @@ jobs:
           name: test-report-1
           path: my_allure_results
           retention-days: 5
-      - name: Deploy report
+#       - name: Deploy report
      
-        uses: JamesIves/github-pages-deploy-action@3.1.0
-        if: always()
-        with:
-         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-         BRANCH: master # The branch the action should deploy to.
-         FOLDER: my_allure_results # The folder the action should deploy.
-         TARGET_FOLDER: docs
+#         uses: JamesIves/github-pages-deploy-action@3.1.0
+#         if: always()
+#         with:
+#          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#          BRANCH: master # The branch the action should deploy to.
+#          FOLDER: my_allure_results # The folder the action should deploy.
+#          TARGET_FOLDER: docs
  
