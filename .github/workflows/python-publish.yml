@@ -2,9 +2,9 @@ name: play-tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   schedule:
     - cron: '00 23 * * *'
 
@@ -49,7 +49,7 @@ jobs:
         if: always()
         with:
          ACCESS_TOKEN: ${{ secrets.ALLURE }}
-         BRANCH: main # The branch the action should deploy to.
+         BRANCH: master # The branch the action should deploy to.
          FOLDER: my_allure_results # The folder the action should deploy.
          TARGET_FOLDER: docs
  
