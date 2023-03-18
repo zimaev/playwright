@@ -8,8 +8,7 @@ on:
   schedule:
     - cron: '00 23 * * *'
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
