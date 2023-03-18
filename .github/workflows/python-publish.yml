@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest-playwright
+          pip install pytest-playwright
           python -m pip install playwright
 
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -36,20 +36,5 @@ jobs:
         run: |
           python3 -m pytest -v --reruns 2 --browser chromium --alluredir=my_allure_results
 
-      - name: Create artifacts
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report-1
-          path: my_allure_results
-          retention-days: 5
-      - name: Deploy report
-     
-        uses: JamesIves/github-pages-deploy-action@3.1.0
-        if: always()
-        with:
-         ACCESS_TOKEN: ${{ secrets.ALLURE }}
-         BRANCH: master # The branch the action should deploy to.
-         FOLDER: my_allure_results # The folder the action should deploy.
-         TARGET_FOLDER: docs
+
  
