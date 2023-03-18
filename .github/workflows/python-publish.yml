@@ -3,12 +3,7 @@ name: play-tests
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  schedule:
-    - cron: '00 23 * * *'
 
-permissions: {}
 
 jobs:
   build:
@@ -33,7 +28,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          python3 -m pytest -v --reruns 2 --browser chromium --alluredir=my_allure_results
+          python3 -m pytest -v --reruns 2 --browser chromium --alluredir=allure_results
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -43,19 +38,19 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
+      - uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
         with:
-          allure_results: my_allure_results
+          allure_results: allure_results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-          
-      - name: Deploy report to Github Pages
+
+
+
+      - uses: peaceiris/actions-gh-pages@v2
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
